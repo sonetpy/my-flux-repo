@@ -7,9 +7,10 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: ../../../../helm-charts/hello-world
+      chart: helm-charts/hello-world
       sourceRef:
         kind: GitRepository
         name: my-flux-repo
+        namespace: flux-system
   values:
     replicaCount: 1
