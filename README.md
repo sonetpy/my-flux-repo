@@ -558,12 +558,12 @@ If you encounter new issues, share the output of the troubleshooting commands, a
 
 
 
-### I am really confused with which Kustomization declaration should I be using why where and when and what each does?
-apiVersion: kustomize.config.k8s.io/v1beta1
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+### Are there two Kustomization types?
+Yes, the kustomization.kustomize.toolkit.fluxcd.io is a Kubernetes custom resource while kustomization.kustomize.config.k8s.io is the type used to configure a Kustomize overlay.
 
-This scares and confuse me. Please keep the answer basic so that I can understand the need and be champ with fluxcd.
-
+The kustomization.kustomize.toolkit.fluxcd.io object refers to a kustomization.yaml file path inside a Git repository or Bucket source.
+https://fluxcd.io/flux/faq/#kustomize-questions
+---
 
 
 
