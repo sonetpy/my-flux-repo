@@ -563,9 +563,8 @@ Yes, the kustomization.kustomize.toolkit.fluxcd.io is a Kubernetes custom resour
 
 The kustomization.kustomize.toolkit.fluxcd.io object refers to a kustomization.yaml file path inside a Git repository or Bucket source.
 https://fluxcd.io/flux/faq/#kustomize-questions
+
 ---
-
-
 
 
 I understand that the different `apiVersion` declarations and the interplay between Kustomization and HelmRelease resources in FluxCD can be confusing, especially when you're trying to get comfortable with GitOps and Flux. I'll break this down in a **simple, beginner-friendly way**, focusing on what each `apiVersion` is for, why and where you use them, and how they fit into your `my-flux-repo` setup to deploy pods in the `morgan-dev`, `morgan-qa`, and `morgan-prod` namespaces. I'll keep it clear, avoid jargon, and relate it directly to your directory structure and the issue of getting pods running. By the end, you'll feel confident about these declarations and how they work together to make you a Flux champ!
