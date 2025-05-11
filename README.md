@@ -558,6 +558,12 @@ If you encounter new issues, share the output of the troubleshooting commands, a
 
 
 
+### I am really confused with which Kustomization declaration should I be using why where and when and what each does?
+apiVersion: kustomize.config.k8s.io/v1beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+
+This scares and confuse me. Please keep the answer basic so that I can understand the need and be champ with fluxcd.
+
 
 
 
