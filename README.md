@@ -564,6 +564,32 @@ Yes, the kustomization.kustomize.toolkit.fluxcd.io is a Kubernetes custom resour
 The kustomization.kustomize.toolkit.fluxcd.io object refers to a kustomization.yaml file path inside a Git repository or Bucket source.
 https://fluxcd.io/flux/faq/#kustomize-questions
 
+### Trick
+Here's a simple trick to remember the relationship between the two Kustomization types:
+
+**"Flux controls what to customize, Kustomize controls how to customize"**
+
+Or think of them as:
+
+1. **Flux's Kustomization** (`kustomize.toolkit.fluxcd.io`) - The *"Delivery Truck"*
+   - Determines *where* to get the manifests (Git repo, bucket)
+   - Determines *what* to customize (path to kustomization.yaml)
+   - Handles deployment (sync interval, health checks)
+
+2. **Kustomize's Kustomization** (`kustomize.config.k8s.io`) - The *"Workshop"*
+   - The actual `kustomization.yaml` file
+   - Defines *how* to customize (patches, resources, images)
+   - Standard Kustomize configuration
+
+**Memory Aid**: 
+- Flux's type has `toolkit` in it (think "toolkit for delivery")
+- Kustomize's type has `config` in it (think "configuration for customization")
+
+They work together like:
+```
+Flux Kustomization (delivery) → Finds → Kustomize Kustomization (configuration) → Generates → Final Manifests
+```
+
 ---
 
 
