@@ -589,7 +589,68 @@ They work together like:
 ```
 Flux Kustomization (delivery) → Finds → Kustomize Kustomization (configuration) → Generates → Final Manifests
 ```
+I understand your confusion! Let me clarify with simple examples of **when to use which Kustomization** and why:
 
+---
+
+### 1. **`kustomization.yaml` (`kustomize.config.k8s.io`)**
+**When to use**: When you need to customize Kubernetes manifests (e.g., patch resources, set common labels, override images).  
+**Where it lives**: Inside your Git repo as a file named `kustomization.yaml`.  
+
+#### Example:
+```yaml
+# ./app/deployment/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+  - service.yaml
+patches:
+  - patch.yaml  # Modifies replica count or image
+```
+
+---
+
+### 2. **Flux Kustomization (`kustomize.toolkit.fluxcd.io`)**
+**When to use**: When you want Flux to **deploy** a Kustomize-managed app from a Git repo/S3 bucket.  
+**Where it lives**: Applied to your cluster as a Custom Resource (CR).  
+
+#### Example:
+```yaml
+# Tells Flux to deploy the app from Git using Kustomize
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: my-app
+  namespace: flux-system
+spec:
+  interval: 5m  # Sync every 5 minutes
+  path: "./app/deployment"  # Path to kustomization.yaml in Git
+  sourceRef:
+    kind: GitRepository  # Where to fetch manifests
+    name: my-repo
+```
+
+---
+
+### Key Differences:
+| Feature | Kustomize (`kustomize.config.k8s.io`) | Flux (`kustomize.toolkit.fluxcd.io`) |
+|---------|--------------------------------------|--------------------------------------|
+| **Purpose** | Customize manifests (e.g., patches, vars) | Deploy Kustomize-managed apps |
+| **Format** | File named `kustomization.yaml` | Kubernetes CR (applied via `kubectl`) |
+| **Location** | Inside Git repo | Applied to the cluster |
+| **Trigger** | Manual (`kubectl apply -k`) | Automated (GitOps) |
+
+---
+
+### Real-World Workflow:
+1. You write a `kustomization.yaml` (Kustomize) to customize manifests.  
+2. You create a Flux `Kustomization` CR to tell Flux:  
+   - *"Watch this Git repo, and deploy everything under `./app/deployment` using Kustomize."*  
+
+This separation keeps **configuration** (Kustomize) and **deployment** (Flux) cleanly decoupled.
+
+Still unclear? Let me know which part is confusing!
 ---
 
 
