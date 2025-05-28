@@ -223,6 +223,23 @@ This breakdown should help you remember the roles of each pod and the tar.gz ext
 
 ---
 
+**Flux Pods in `flux-system` - Quick Memory Trick**
+
+Think **"SHKIN"** (Source, Helm, Kustomize, Image, Notification) for the main Flux pods and their roles:
+
+- **S**ource-controller: **Fetches & Extracts** (pulls Git, Helm charts, buckets; extracts tar.gz).
+- **H**elm-controller: **Deploys Helm** (renders & applies Helm charts).
+- **K**ustomize-controller: **Deploys Manifests** (applies Kustomize manifests).
+- **I**mage-reflector-controller: **Scans Images** (checks image tags for updates).
+- **N**otification-controller: **Sends Alerts** (notifies on events).
+
+**tar.gz Trick**: **S**ource-controller is the **"unzipper"**—it pulls and extracts tar.gz for Git/Helm/Bucket.
+
+**Mnemonic**: "SHKIN unzips and deploys!"
+
+
+---
+
 In the context of **Flux**, a GitOps toolkit for Kubernetes, deploying Helm releases involves using Flux's `HelmRelease` custom resource alongside other resources like `Kustomization`, `GitRepository`, or `Bucket` to manage and reconcile Helm charts. Below, I’ll explain how to detect if a Helm release is deployed, what links a Helm release to be deployed, the role of sources like `GitRepository` or `Bucket`, and provide YAML examples, a text-based flow diagram, and a troubleshooting strategy with commands to narrow down issues.
 
 ### 1. **What Happens When a Helm Release is Deployed?**
