@@ -1,0 +1,12 @@
+apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: my-team-dev-values
+    namespace: dev
+  data:
+    values.yaml: |
+      replicaCount: 3
+      image:
+        tag: "1.25.0"
+      service:
+        port: 8080

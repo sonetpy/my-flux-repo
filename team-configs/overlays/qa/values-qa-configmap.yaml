@@ -1,0 +1,12 @@
+apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: my-team-qa-values
+    namespace: qa
+  data:
+    values.yaml: |
+      replicaCount: 1
+      image:
+        tag: "1.24.0"
+      service:
+        port: 80
